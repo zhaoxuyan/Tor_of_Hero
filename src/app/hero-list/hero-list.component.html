@@ -1,0 +1,12 @@
+<!--[]类到模板-->
+<!--()模板到类-->
+<!--{{}}Angular的差值表达式-->
+<h2>My Heros</h2>
+<ul class="heroes">
+  <li *ngFor="let i of heroes"
+      [class.selected]="isSelected(i)"
+      (click)="onSelect(i)">
+    <span class="badge">{{i.id}}</span> {{i.name}}
+  </li>
+</ul>
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>

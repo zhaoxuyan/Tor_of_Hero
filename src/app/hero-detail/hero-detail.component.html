@@ -1,0 +1,11 @@
+<!--使用 ngIf 隐藏空的详情-->
+<div *ngIf="hero">
+  <h2>{{hero.name}} details!</h2>
+  <div><label>id: </label>{{hero.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="hero.name" placeholder="name"/>
+    <button (click)="goBack()">RETURN</button>
+  </div>
+
+</div>
