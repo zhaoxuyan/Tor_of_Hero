@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Hero} from '../hero';
 import {HeroService} from '../hero.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-hero-list',
@@ -12,7 +13,7 @@ export class HeroListComponent implements OnInit {
   selectedHero: Hero;
 
   // 服务的依赖式注入
-  constructor(private heroService: HeroService) {
+  constructor(private heroService: HeroService, private router: Router) {
   }
 
   // implements interface
@@ -36,5 +37,9 @@ export class HeroListComponent implements OnInit {
 
   isSelected(i: Hero): boolean {
     return i === this.selectedHero;
+  }
+
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedHero.id]);
   }
 }
