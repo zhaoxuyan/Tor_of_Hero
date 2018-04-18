@@ -6,9 +6,9 @@ import {FormsModule} from '@angular/forms';
 import {HeroDetailComponent} from './hero-detail/hero-detail.component';
 import {HeroService} from './hero.service';
 import {HeroListComponent} from './hero-list/hero-list.component';
-import {RouterModule} from '@angular/router';
-import { HeroDashboardComponent } from './hero-dashboard/hero-dashboard.component';
+import {HeroDashboardComponent} from './hero-dashboard/hero-dashboard.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
     // RouterModule.forRoot([
     //   {
     //     path: 'herolist',

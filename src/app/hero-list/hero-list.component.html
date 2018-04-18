@@ -1,12 +1,24 @@
 <!--[]类到模板-->
 <!--()模板到类-->
 <!--{{}}Angular的差值表达式-->
-<h2>My Heros</h2>
+<h2 xmlns="">My Heros</h2>
+<!--add button 模板变量：#heroNo-->
+<div>
+  <label>Hero no:</label> <input #heroNo/>
+  <label>Hero name:</label> <input #heroName/>
+  <button (click)="add(heroNo.value, heroName.value);heroNo.value='';heroName.value=''">
+    Add
+  </button>
+</div>
+
 <ul class="heroes">
   <li *ngFor="let i of heroes"
       [class.selected]="isSelected(i)"
       (click)="onSelect(i)">
-    <span class="badge">{{i.id}}</span> {{i.name}}
+    <span class="badge">{{i.no}}</span> {{i.name}}
+    <button class="delete"
+            (click)="delete(i); $event.stopPropagation()">x
+    </button>
   </li>
 </ul>
 <!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
@@ -16,3 +28,4 @@
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>
+

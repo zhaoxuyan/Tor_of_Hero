@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 
 import {Hero} from './hero';
-import {HEROES} from './mock-hero';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class HeroService {
+  herosUrl = 'http://localhost:2403/heroes';
 
-  constructor() {
+  constructor(private http: Http) {
   }
 
   // getHeroes(): Hero[] {
@@ -14,8 +15,38 @@ export class HeroService {
   // }
   // 承诺
   getHeroes(): Promise<Hero[]> {
-    return Promise.resolve(HEROES);
+    // return Promise.resolve(HEROES)
+    return this.http
+      .get(this.herosUrl)
+      .toPromise()
+      .then(rep => rep.json() as Hero[])
+      .catch();
   }
+
+  // 更新 Update
+  update(hero: Hero): Promise<Hero> {
+    return this.http.put(`${this.herosUrl}/${hero.id}`, hero)
+      .toPromise()
+      .then(rep => rep.json() as Hero)
+      .catch();
+  }
+
+  // 添加 Add
+  create(mNo: string, mName: string): Promise<Hero> {
+    return this.http.post(this.herosUrl, {no: mNo, name: mName})
+      .toPromise()
+      .then(rep => rep.json() as Hero)
+      .catch();
+  }
+
+  // 删除 Delete
+  delete(id: string): Promise<void> {
+    return this.http.delete(`${this.herosUrl}/${id}`)
+      .toPromise()
+      .then(() => null)
+      .catch();
+  }
+
   // 模拟网络延迟
   getHeroesSlowly(): Promise<Hero[]> {
     return new Promise(resolve => {
@@ -24,7 +55,7 @@ export class HeroService {
     });
   }
 
-  getHero(id: number): Promise<Hero> {
+  getHero(id: string): Promise<Hero> {
     return this.getHeroes()
       .then(heroes => heroes.find(hero => hero.id === id));
   }
